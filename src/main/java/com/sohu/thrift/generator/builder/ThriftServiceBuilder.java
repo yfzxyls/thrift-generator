@@ -85,7 +85,9 @@ public class ThriftServiceBuilder {
 		for (Iterator<ThriftStruct> i = structs.iterator(); i.hasNext();) {
 			ThriftStruct ts = i.next();
 			if (Throwable.class.isAssignableFrom(ts.getPeerClass())) {
-				exceptions.add(ts);
+				 //相同的异常只生成一次
+                		if (!exceptions.contains(ts))
+                    		    exceptions.add(ts);
 				i.remove();
 			}
 		}
